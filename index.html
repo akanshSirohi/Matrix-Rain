@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Matrix Rain</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background-color: black;
+			}
+			@font-face {
+				font-family: asoft;
+				src: url(fnt4.ttf);
+				font-weight: bold;
+			}	
+			@font-face {
+				font-family: asof;
+				src: url(fnt5.ttf);
+				font-weight: bold;
+			}
+			canvas {
+				z-index:-1000;
+				position:absolute;
+				display: block;
+			}
+			h1 {
+				z-index:1001;
+				color:#0F0;
+				position:absolute;
+				font-family: asoft;
+				margin-left: 440px;
+				margin-top: 250px;
+				font-size: 50px;
+				text-shadow: 0 0 4px #0F0;
+			}	
+			h2 {
+				z-index:1001;
+				color:#0F0;
+				position:absolute;
+				font-family: asof;
+				margin-left: 485px;
+				margin-top: 299px;
+				text-shadow: 0 0 5px #0F0;
+				transition: 0.5s ease;
+			}
+			div.lines {
+				z-index:1001;
+				position:absolute;
+				border-style:solid;
+				border-color:#0F0 transparent #0F0 transparent;
+				height:23px;
+				width:358px;
+				margin-top:299px;
+				margin-left:485px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="c"></canvas>
+		<div class="lines"></div>
+		<h1>AKANSH SIROHI</h1>
+		<h2 id="sub">Creative Programmer</h2>
+		<script>
+			/*
+
+			====================================================================================
+			Created By Akansh Sirohi (Creative Programmer)		
+			====================================================================================
+
+			*/
+		</script>
+		<script>
+			var flg=0;
+			setInterval(draw, 33);
+			var c = document.getElementById("c");
+			var ctx = c.getContext("2d");
+			c.height = window.innerHeight;
+			c.width = window.innerWidth;
+			var nums = "12356789123456789123456789123456789";
+			nums = nums.split("");
+			var font_size = 11;
+			var columns = c.width/font_size; 
+			var drops = [];
+			for(var x = 0; x < columns; x++)
+			drops[x] = 1; 
+			
+			function draw() {
+				ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+				ctx.fillRect(0, 0, c.width, c.height);
+				ctx.fillStyle = getColor();
+				ctx.font = font_size + "px arial";
+				for(var i = 0; i < drops.length; i++) {
+					var text = nums[Math.floor(Math.random()*nums.length)];
+					ctx.fillText(text, i*font_size, drops[i]*font_size);
+					if(drops[i]*font_size > c.height && Math.random() > 0.975) {
+						drops[i] = 0;
+					}
+					drops[i]++;
+				}
+			}
+			function random(min, max) {
+				return Math.floor(Math.random() * (max - min + 1) ) + min;
+			}
+			function randomCol() {
+					var r,g,b;
+					r=random(0,255);
+					g=random(0,255);
+					b=random(0,255);
+					r=r.toString(16);
+					g=g.toString(16);
+					b=b.toString(16);
+					return "#"+r+g+b;
+			}
+			function getColor() {
+				var arr=["#F00","#0F0","#00F"];
+				if(flg=='0') {
+					flg=1;
+					//return randomCol();
+					return arr[random(0,2)];
+				}else{
+					flg=0;
+					//return randomCol();
+					return arr[random(0,2)];
+				}
+			}
+			</script>
+			<script>
+			var t=0;
+			setInterval(function(){
+				if(t==0) {
+					t=1;
+					document.getElementById('sub').style.textShadow="0 0 8px #0F0";
+				}else{
+					t=0;
+					document.getElementById('sub').style.textShadow="0 0 3px #0F0";
+				}
+			},1000);
+		</script>
+	</body>
+</html>
